@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.pdmtaller2.JavierCaceres_00068223.ui.navigations.*
 import com.pdmtaller2.JavierCaceres_00068223.ui.screens.RestaurantDetailScreen
 import com.pdmtaller2.JavierCaceres_00068223.ui.screens.RestaurantsListScreen
+import com.pdmtaller2.JavierCaceres_00068223.ui.screens.SearchScreen
 
 @Composable
 fun CustomScaffold() {
@@ -38,10 +39,15 @@ fun CustomScaffold() {
                 )
             }
             composable<SearchScreenNavigation> {
-                Text("Pantalla de búsqueda", modifier = Modifier.fillMaxSize().padding(16.dp))
+                SearchScreen { id ->
+                    navController.navigate(RestaurantDetailScreenNavigation(id))
+                }
             }
             composable<OrdersScreenNavigation> {
-                Text("Pantalla de órdenes", modifier = Modifier.fillMaxSize().padding(16.dp))
+                Text("Pantalla de órdenes",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp))
             }
             composable<RestaurantDetailScreenNavigation> { backStackEntry ->
                 val restaurantId = backStackEntry.arguments?.getInt("id") ?: 0
